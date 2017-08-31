@@ -4,18 +4,21 @@ import time
 import datetime as d
 import os
 
-#constant
+#Set the GPIO Pin
 LED = 8
-#GPIO Set
+
+#initialize GPIO Module
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(LED, GPIO.OUT, initial = GPIO.LOW)
 
 def turnOn():
         GPIO.output(LED, GPIO.HIGH)
         addLog("LED가 커졌습니다.")
+
 def turnOff():
         GPIO.output(LED, GPIO.LOW)
         addLog("LED가 꺼졌습니다.")
+
 def addLog(msg):
 	os.system("echo " + msg + "\(" + getCurrentTime() +"\) >> ledlog.txt")
         print msg
