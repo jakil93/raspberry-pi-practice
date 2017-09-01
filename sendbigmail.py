@@ -47,7 +47,7 @@ def controlLED(target):
 	turnOffLED(target)
 
 #Send Mail function
-def sendMail(givenmail, subject, content):
+def sendMail(givenmail, subject, content, email, pw):
 
 
 	#set SMTP
@@ -56,7 +56,7 @@ def sendMail(givenmail, subject, content):
 	smtp.starttls()
 
 	#login
-	smtp.login('ares9046@gmail.com','netgear12')
+	smtp.login(email, pw)
 
 	#append subject and content
 	msg = MIMEText(content)
@@ -64,15 +64,16 @@ def sendMail(givenmail, subject, content):
 
 	#receiver
 	msg['To'] = givenmail
-	smtp.sendmail('ares9046@gmail.com', givenmail, msg.as_string())
+	smtp.sendmail(email, givenmail, msg.as_string())
 	smtp.quit()
 
 	#when complete, notify LED!
 	controlLED(GPIO_LED)
+	
 #thread start function
-def sendMailStart(receiver, subject, content):
-	for x in xrange(1,100):
-		sendMail(str(receiver), str(subject), str(content))
+def sendMailStart(receiver, subject, content, email, pw):
+	for x in xrange(1, 100):
+		sendMail(str(receiver), str(x) + "번째" + str(subject), str(content), email, pw)
 		print str(x) + "번째 메일 전송!"
 
 #make instance
@@ -92,7 +93,7 @@ def main():
 		'receiver' : receiver
 	}
 
-	th = Thread(target = sendMailStart, args=(receiver, "제목", "내용"))
+	th = Thread(target = sendMailStart, args=(receiver, "제목", "내용", email, pw))
 	th.start()
 
 	return render_template("main.html", **data)
