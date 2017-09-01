@@ -58,7 +58,7 @@ def ledalloff():
 	return "all led turn off"
 
 @app.route("/ledallon", methods=["GET"])
-def ledalloff():
+def ledallon():
 	GPIO.output(LED_RED, GPIO.HIGH)
 	GPIO.output(LED_YELLOW, GPIO.HIGH)
 	return "all led turn on"
