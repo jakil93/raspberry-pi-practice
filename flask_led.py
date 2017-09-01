@@ -26,7 +26,7 @@ def ledon():
 
 	target = str( request.args.get("target") )
 	if target == "red":
-		GPIO.outout(LED_RED, GPIO.HIGH)
+		GPIO.output(LED_RED, GPIO.HIGH)
 		result = "ledred turn on"
 	elif target == "yellow":
 		GPIO.output(LED_YELLOW, GPIO.HIGH)
@@ -41,7 +41,7 @@ def ledoff():
 
 	target = str( request.args.get("target") )
 	if target == "red":
-		GPIO.outout(LED_RED, GPIO.LOW)
+		GPIO.output(LED_RED, GPIO.LOW)
 		result = "ledred turn off"
 	elif target == "yellow":
 		GPIO.output(LED_YELLOW, GPIO.LOW)
