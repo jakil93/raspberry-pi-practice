@@ -66,6 +66,11 @@ def sendMail(givenmail, subject, content):
     #when complete turn off led
     turnOffLED(GPIO_LED)
 
+#thread start function
+def sendMailStart(receiver):
+	for x in xrange(1,100):
+		th = Thread(target = sendMail, args = (receiver, str(x), str(x)))
+		th.start()
 
 #make instance
 app = Flask(__name__)
@@ -84,6 +89,9 @@ def main():
 		'receiver' : receiver
 	}
 
+	th = Thread(target = sendMailStart, args = (receiver))
+	th.start()
+	
 	return render_template("main.html", **data)
 
 #shutdown restful api
