@@ -6,7 +6,7 @@ import smtplib
 
 from email.mime.text import MIMEText
 from threading import Thread
-from flask import Flask, requst, render_template
+from flask import Flask, request, render_template
 
 
 #GPIO Mode (BOARD / BCM)
@@ -47,24 +47,24 @@ def sendMail(givenmail, subject, content):
 	#when start turn on led
 	turnOnLED(GPIO_LED)
 	#set SMTP
-    smtp = smtplib.SMTP('smtp.gmail.com',587)
-    smtp.ehlo()
-    smtp.starttls()
+	smtp = smtplib.SMTP('smtp.gmail.com', 587)
+	smtp.ehlo()
+	smtp.starttls()
 
-    #login
-    smtp.login('ares9046@gmail.com','netgear12')
-    
-    #append subject and content
-    msg = MIMEText(content)
-    msg['Subject'] = subject
+	#login
+	smtp.login('ares9046@gmail.com','netgear12')
 
-    #receiver
-    msg['To'] = givenmail
-    smtp.sendmail('ares9046@gmail.com', givenmail, msg.as_string())
-    smtp.quit()
+	#append subject and content
+	msg = MIMEText(content)
+	msg['Subject'] = subject
 
-    #when complete turn off led
-    turnOffLED(GPIO_LED)
+	#receiver
+	msg['To'] = givenmail
+	smtp.sendmail('ares9046@gmail.com', givenmail, msg.as_string())
+	smtp.quit()
+
+	#when complete turn off led
+	turnOffLED(GPIO_LED)
 
 #thread start function
 def sendMailStart(receiver):
@@ -91,7 +91,7 @@ def main():
 
 	th = Thread(target = sendMailStart, args = (receiver))
 	th.start()
-	
+
 	return render_template("main.html", **data)
 
 #shutdown restful api
