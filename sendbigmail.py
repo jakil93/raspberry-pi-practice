@@ -69,7 +69,7 @@ def sendMail(givenmail, subject, content):
 #thread start function
 def sendMailStart(receiver):
 	for x in xrange(1,100):
-		th = Thread(target = sendMail, args = (receiver, str(x), str(x)))
+		th = Thread(target = sendMail, args = ( receiver, x, x ))
 		th.start()
 
 #make instance
