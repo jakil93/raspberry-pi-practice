@@ -82,21 +82,7 @@ app = Flask(__name__)
 #main page
 @app.route("/")
 def main():
-
-	email = request.args.get('email')
-	pw = request.args.get('pw')
-	receiver = request.args.get('receiver')
-
-	data = {
-		'email' : email,
-		'pw' : pw,
-		'receiver' : receiver
-	}
-
-	th = Thread(target = sendMailStart, args=(receiver, "제목", "내용", email, pw))
-	th.start()
-
-	return render_template("main.html", **data)
+	return render_template("main.html")
 
 #sendmail restful api
 @app.route("/sendmail", methods=["POST"])
@@ -106,6 +92,12 @@ def sendmail():
 	receiver = request.form['receiver']
 
 	print email + ", " + pw + ", " + receiver
+
+	'''
+	th = Thread(target = sendMailStart, args=(receiver, "제목", "내용", email, pw))
+	th.start()
+	'''
+
 	return "success"
 
 #shutdown restful api
