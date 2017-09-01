@@ -41,11 +41,15 @@ def turnOnLED(target):
 def turnOffLED(target):
     GPIO.output(target, GPIO.LOW)
 
+def controlLED(target):
+	turnOnLED(target)
+	time.sleep(1.2)
+	turnOffLED(target)
+
 #Send Mail function
 def sendMail(givenmail, subject, content):
 
-	#when start turn on led
-	turnOffLED(GPIO_LED)
+
 	#set SMTP
 	smtp = smtplib.SMTP('smtp.gmail.com', 587)
 	smtp.ehlo()
@@ -63,8 +67,8 @@ def sendMail(givenmail, subject, content):
 	smtp.sendmail('ares9046@gmail.com', givenmail, msg.as_string())
 	smtp.quit()
 
-	#when complete turn off led
-	turnOnLED(GPIO_LED)
+	#when complete, notify LED!
+	controlLED(GPIO_LED)
 #thread start function
 def sendMailStart(receiver, subject, content):
 	for x in xrange(1,100):
