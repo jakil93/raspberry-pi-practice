@@ -1,22 +1,21 @@
 #Libraries
 import RPi.GPIO as GPIO
 import time
+import os
  
 #GPIO Mode (BOARD / BCM)
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BOARD)
 
 #GPIO disable warnning!
 GPIO.setwarnings(False)
 
 #set GPIO Pins
-GPIO_TRIGGER = 18
-GPIO_ECHO = 24
-GPIO_LED = 14
+GPIO_TRIGGER = 7
+GPIO_ECHO = 5
  
 #set GPIO direction (IN / OUT)
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
 GPIO.setup(GPIO_ECHO, GPIO.IN)
-GPIO.setup(GPIO_LED, GPIO.OUT, initial=GPIO.LOW)
  
 def distance():
     # set Trigger to HIGH
@@ -46,10 +45,10 @@ def distance():
     return distance
 
 def turnOn():
-    GPIO.output(GPIO_LED, GPIO.HIGH)
+    os.system("curl http://192.168.0.101/ledon?target=red")
 
 def turnOff():
-    GPIO.output(GPIO_LED, GPIO.LOW)
+    os.system("curl http://192.168.0.101/ledoff?target=red")
  
 if __name__ == '__main__':
     try:
@@ -67,3 +66,4 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         print("Measurement stopped by User")
         GPIO.cleanup()
+        os.system("curl http://192.168.0.101/ledalloff")
