@@ -63,6 +63,10 @@ def ledallon():
 	GPIO.output(LED_YELLOW, GPIO.HIGH)
 	return "all led turn on"
 
+@app.route("/")
+def main():
+	return render_template("main.html")
+
 if __name__ == "__main__":
 	app.run(debug = True, host = "0.0.0.0", port = 8888)
 	GPIO.cleanup()
