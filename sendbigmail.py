@@ -45,7 +45,7 @@ def turnOffLED(target):
 def sendMail(givenmail, subject, content):
 
 	#when start turn on led
-	turnOnLED(GPIO_LED)
+	turnOffLED(GPIO_LED)
 	#set SMTP
 	smtp = smtplib.SMTP('smtp.gmail.com', 587)
 	smtp.ehlo()
@@ -64,12 +64,12 @@ def sendMail(givenmail, subject, content):
 	smtp.quit()
 
 	#when complete turn off led
-	turnOffLED(GPIO_LED)
-
+	turnOnLED(GPIO_LED)
 #thread start function
-def sendMailStart():
+def sendMailStart(receiver, subject, content):
 	for x in xrange(1,100):
-		sendMail("jakil93@naver.com", "테스트제목", "내용")
+		sendMail(str(receiver), str(subject), str(content))
+		print x + "번째 메일 전송!"
 
 #make instance
 app = Flask(__name__)
@@ -88,7 +88,7 @@ def main():
 		'receiver' : receiver
 	}
 
-	th = Thread(target = sendMailStart)
+	th = Thread(target = sendMailStart, args=(receiver, "제목", "내용"))
 	th.start()
 
 	return render_template("main.html", **data)
