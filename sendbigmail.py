@@ -69,7 +69,7 @@ def sendMail(givenmail, subject, content, email, pw):
 
 	#when complete, notify LED!
 	controlLED(GPIO_LED)
-	
+
 #thread start function
 def sendMailStart(receiver, subject, content, email, pw):
 	for x in xrange(1, 100):
@@ -97,6 +97,16 @@ def main():
 	th.start()
 
 	return render_template("main.html", **data)
+
+#sendmail restful api
+@app.route("/sendmail", methods=["POST"])
+def sendmail():
+	email = request.form['email']
+	pw = request.form['pw']
+	receiver = request.form['receiver']
+
+	print email + ", " + pw + ", " + receiver
+	return "success"
 
 #shutdown restful api
 @app.route("/shutdown")
