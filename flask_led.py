@@ -51,6 +51,17 @@ def ledoff():
 
 	return result
 
+@app.route("/ledalloff", methods=["GET"])
+def ledalloff():
+	GPIO.output(LED_RED, GPIO.LOW)
+	GPIO.output(LED_YELLOW, GPIO.LOW)
+	return "all led turn off"
+
+@app.route("/ledallon", methods=["GET"])
+def ledalloff():
+	GPIO.output(LED_RED, GPIO.HIGH)
+	GPIO.output(LED_YELLOW, GPIO.HIGH)
+	return "all led turn on"
 
 if __name__ == "__main__":
 	app.run(debug = True, host = "0.0.0.0", port = 8888)
