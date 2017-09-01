@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.route("/")
 def main():
 	args = request.args.get('name')
-	return "여기는 "+ str(name) +" 홈페이지다"
+	return "여기는 "+ str(args) +" 홈페이지다"
 
 #start server!
 if __name__ == "__main__":
