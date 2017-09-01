@@ -4,8 +4,12 @@
 	<title>Send Big Mail!!</title>
 </head>
 <body>
-	{{email}} 이메일로 {{receiver}} 에게 이메일 100개를 전송했습니다.<br>
-	
-	반가워요!
+
+	이메일 100개를 보내겠습니다~
+	<form action="sendmail" method="POST">
+		EMAIL : <input type="text" name="email"><br>
+		PW : <input type="password" name="pw"><br>
+		RECEIVER : <input type="text" name="receiver">
+	</form>
 </body>
 </html>
