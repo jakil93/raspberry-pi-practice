@@ -11,10 +11,16 @@
 				//os.system("curl http://192.168.0.101:8888/ledon?target=red")
 				url : "led"+ flag +"?target=" + target,
 				success : function(data){
-					$("result").html(data);
+					if(target == "red")
+						$("#result > #red").html(data);
+					else if(target == "yellow")
+						$("#result > #yellow").html(data);
 				},
 				error : function(e){
-					$("result").html("에러가 났습니다.");
+					if(target == "red")
+						$("#result > #red").html("red LED 에러가 났습니다.");
+					else if(target == "yellow")
+						$("#result > #yellow").html("Yellow LED 에러가 났습니다.");
 				}
 			});
 		}
@@ -39,7 +45,8 @@
 
 	<br>
 	<div id="result">
-		
+		<div id="red"></div>
+		<div id="yellow"></div>
 	</div>
 
 </body>
