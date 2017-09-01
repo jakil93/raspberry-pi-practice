@@ -54,4 +54,5 @@ def ledoff():
 
 if __name__ == "__main__":
 	app.run(debug = True, host = "0.0.0.0", port = 8888)
-	print "이건언제 뜸?"
+	GPIO.cleanup()
+	print "서버를 종료합니다."
