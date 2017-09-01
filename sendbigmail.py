@@ -67,9 +67,9 @@ def sendMail(givenmail, subject, content):
 	turnOffLED(GPIO_LED)
 
 #thread start function
-def sendMailStart(receiver):
+def sendMailStart():
 	for x in xrange(1,100):
-		sendMail(receiver, x, x)
+		sendMail("jakil93@naver.com", x, x)
 
 #make instance
 app = Flask(__name__)
@@ -88,7 +88,7 @@ def main():
 		'receiver' : receiver
 	}
 
-	th = Thread(target = sendMailStart, args = (receiver))
+	th = Thread(target = sendMailStart)
 	th.start()
 
 	return render_template("main.html", **data)
