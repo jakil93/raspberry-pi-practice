@@ -6,21 +6,18 @@
 	</script>
 
 	<script type="text/javascript">
-	
-		function ledOn(){
-
+		function controlLED(target, flag){
 			$.ajax({
 				//os.system("curl http://192.168.0.101:8888/ledon?target=red")
-				url : "ledon?target=red",
+				url : "led"+ flag +"?target=" + target,
 				success : function(data){
-					alert(data);
+					$("result").html(data);
 				},
 				error : function(e){
-					alert("에러");
+					$("result").html("에러가 났습니다.");
 				}
 			});
 		}
-
 	</script>
 
 </head>
@@ -34,8 +31,16 @@
 		<input type="submit" value="전송">
 	</form>
 
-	<button onclick="ledOn()">빨간색 LED</button>
+	<button onclick="controlLED('red', 'on')">빨간색 LED ON</button>
+	<button onclick="controlLED('red', 'off')">빨간색 LED OFF</button>
+	<br>
+	<button onclick="controlLED('yellow', 'on')">노란색 LED ON</button>
+	<button onclick="controlLED('yellow', 'off')">노란색 LED OFF</button>
 
+	<br>
+	<div id="result">
+		
+	</div>
 
 </body>
 </html>
