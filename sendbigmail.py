@@ -69,7 +69,7 @@ def sendMail(givenmail, subject, content):
 def sendMailStart(receiver, subject, content):
 	for x in xrange(1,100):
 		sendMail(str(receiver), str(subject), str(content))
-		print x + "번째 메일 전송!"
+		print str(x) + "번째 메일 전송!"
 
 #make instance
 app = Flask(__name__)
