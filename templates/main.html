@@ -2,6 +2,29 @@
 <html>
 <head>
 	<title>Send Big Mail!!</title>
+	<script type="text/javascript" src="jquery.js"></script>
+
+	<script type="text/javascript">
+	
+		function ledOn(){
+
+			$.ajax({
+				//os.system("curl http://192.168.0.101:8888/ledon?target=red")
+				url : "ledon?target=red",
+				success : function(data){
+					alert(data);
+				},
+				error : function(e){
+					alert("에러");
+				}
+			}).done(function(data){
+				alert(data);
+			});
+
+		}
+
+	</script>
+
 </head>
 <body>
 
@@ -12,5 +35,9 @@
 		RECEIVER : <input type="text" name="receiver">
 		<input type="submit" value="전송">
 	</form>
+
+	<button onclick="ledOn()">빨간색 LED</button>
+
+
 </body>
 </html>
