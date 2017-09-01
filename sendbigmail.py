@@ -69,8 +69,7 @@ def sendMail(givenmail, subject, content):
 #thread start function
 def sendMailStart(receiver):
 	for x in xrange(1,100):
-		th = Thread(target = sendMail, args = ( receiver, x, x ))
-		th.start()
+		sendMail(receiver, x, x)
 
 #make instance
 app = Flask(__name__)
