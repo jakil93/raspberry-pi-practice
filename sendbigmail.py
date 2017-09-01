@@ -1,6 +1,7 @@
 #coding: utf-8
 
 from flask import Flask
+from flask import request
 
 #make instance
 app = Flask(__name__)
@@ -8,7 +9,8 @@ app = Flask(__name__)
 #main page
 @app.route("/")
 def main():
-	return "여기는 태영이 홈페이지다"
+	args = request.args.get('name')
+	return "여기는 "+ str(name) +" 홈페이지다"
 
 #start server!
 if __name__ == "__main__":
