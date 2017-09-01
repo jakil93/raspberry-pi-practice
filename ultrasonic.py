@@ -45,10 +45,10 @@ def distance():
     return distance
 
 def turnOn():
-    os.system("curl http://192.168.0.101/ledon?target=red")
+    os.system("curl http://192.168.0.101:8888/ledon?target=red")
 
 def turnOff():
-    os.system("curl http://192.168.0.101/ledoff?target=red")
+    os.system("curl http://192.168.0.101:8888/ledoff?target=red")
  
 if __name__ == '__main__':
     try:
@@ -66,4 +66,4 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         print("Measurement stopped by User")
         GPIO.cleanup()
-        os.system("curl http://192.168.0.101/ledalloff")
+        os.system("curl http://192.168.0.101:8888/ledalloff")
