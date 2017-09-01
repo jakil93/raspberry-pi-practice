@@ -60,7 +60,7 @@ if __name__ == '__main__':
             else:
                 turnOff()
                 
-            time.sleep(1)
+            time.sleep(0.0001)
  
         # Reset by pressing CTRL + C
     except KeyboardInterrupt:
