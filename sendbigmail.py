@@ -72,9 +72,15 @@ def sendMail(givenmail, subject, content, email, pw):
 
 #thread start function
 def sendMailStart(receiver, subject, content, email, pw):
-	for x in xrange(1, 100):
-		sendMail(str(receiver), str(x) + "번째" + str(subject), str(content), email, pw)
-		print str(x) + "번째 메일 전송!"
+	result = "success"
+	for x in xrange(1, 10):
+		try:
+			sendMail(str(receiver), str(x) + "번째" + str(subject), str(content), email, pw)
+			print str(x) + "번째 메일 전송!"
+		except Exception:
+			result = "fail"
+
+	return result
 
 #make instance
 app = Flask(__name__)
@@ -97,8 +103,7 @@ def sendmail():
 	th = Thread(target = sendMailStart, args=(receiver, "제목", "내용", email, pw))
 	th.start()
 	'''
-
-	return "success"
+	return sendMailStart(receiver, "제목", "내용", email, pw)
 
 #shutdown restful api
 @app.route("/shutdown")
