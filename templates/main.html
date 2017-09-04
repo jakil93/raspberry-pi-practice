@@ -7,7 +7,10 @@
 
 	<script type="text/javascript">
 
-		function jsonTest(name, age){
+		function jsonTest(){
+
+			var name = $("#name").val();
+			var age = $("#age").val();
 
 			$.ajax({
 				url: "jsontest",
@@ -60,7 +63,9 @@
 
 	<hr>
 	<h1>JSON TEST</h1>
-	<button onclick="jsonTest('kty', '24')">JSON 받아보기</button>
+	NAME : <input type="text" id="name"/> <br/>
+	AGE : <input type="text" id="age"/> <br/>
+	<button onclick="jsonTest()">JSON 받아보기</button>
 
 </body>
 </html>
