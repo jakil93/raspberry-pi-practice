@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Send Big Mail!!</title>
+	<title>Flask</title>
 	<script src="{{ url_for('static', filename='jquery.js') }}">
 	</script>
 
 	<script type="text/javascript">
+
+		function jsonTest(name, age){
+
+			$.ajax({
+				url: "jsontest",
+				method: "POST",
+				success: function(data){
+					alert("success!! \nname : " + data.name + "\nage : " + data.age);
+				},
+				error: function(){
+					alert("error!!");
+				}
+			});
+
+		}
+
 		function controlLED(target, flag){
 			$.ajax({
 				url : "led"+ flag +"?target=" + target,
@@ -39,6 +55,10 @@
 		<div id="red"></div>
 		<div id="yellow"></div>
 	</div>
+
+	<hr>
+	<h1>JSON TEST</h1>
+	<button onclick="jsonTest('kty', '24')">JSON 받아보기</button>
 
 </body>
 </html>

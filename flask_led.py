@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 import time
 import logger
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 
 GPIO.setmode(GPIO.BCM)
 
@@ -21,6 +21,12 @@ GPIO.setup(LED_YELLOW, GPIO.OUT, initial=GPIO.LOW)
 
 #get flask instance
 app = Flask(__name__)
+
+@app.route("/jsontest", method=["POST"])
+def jsontest():
+	name = request.form['name']
+	age = request.form['age']
+	return jsonify(name=name, age=age)
 
 @app.route("/ledon", methods=["GET"])
 def ledon():
