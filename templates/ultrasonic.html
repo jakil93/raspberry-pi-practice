@@ -7,7 +7,16 @@
 
 	<script type="text/javascript">
 		$(function(){
-			alert("ㅅㄷㄴㅅ");
+			$.ajax({
+				url: 'ajax',
+				dataType: 'json',
+				success: function(data){
+					$("#view").html(data.dist + "cm");
+				},
+				error: function(){
+					$("#view").html("Error!!");
+				}
+			});
 		})
 	</script>
 </head>
