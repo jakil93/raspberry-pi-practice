@@ -22,7 +22,7 @@ GPIO.setup(LED_YELLOW, GPIO.OUT, initial=GPIO.LOW)
 #get flask instance
 app = Flask(__name__)
 
-@app.route("/jsontest", method=["POST"])
+@app.route("/jsontest", methods=["POST"])
 def jsontest():
 	name = request.form['name']
 	age = request.form['age']
