@@ -8,7 +8,6 @@
 	<script type="text/javascript">
 		function controlLED(target, flag){
 			$.ajax({
-				//os.system("curl http://192.168.0.101:8888/ledon?target=red")
 				url : "led"+ flag +"?target=" + target,
 				success : function(data){
 					if(target == "red")
@@ -28,15 +27,7 @@
 
 </head>
 <body>
-
-	이메일 100개를 보내겠습니다~
-	<form action="sendmail" method="POST">
-		EMAIL : <input type="text" name="email"><br>
-		PW : <input type="password" name="pw"><br>
-		RECEIVER : <input type="text" name="receiver">
-		<input type="submit" value="전송">
-	</form>
-
+	<h1>LED Controller</h1>
 	<button onclick="controlLED('red', 'on')">빨간색 LED ON</button>
 	<button onclick="controlLED('red', 'off')">빨간색 LED OFF</button>
 	<br>
