@@ -12,6 +12,8 @@
 			$.ajax({
 				url: "jsontest",
 				method: "POST",
+				data: "name=" + name + "&age=" + age,
+				dataType: "json",
 				success: function(data){
 					alert("success!! \nname : " + data.name + "\nage : " + data.age);
 				},
