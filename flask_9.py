@@ -16,5 +16,5 @@ def articles():
 @app.route('/article/<int:id>')
 def article(id):
 	return render_template('article.html', id = id, articles= articles)
-if __name__ == '__main__'
+if __name__ == '__main__':
 	app.run(debug=True, host="0.0.0.0", port=8888)
