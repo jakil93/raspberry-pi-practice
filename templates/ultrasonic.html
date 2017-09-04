@@ -7,7 +7,7 @@
 
 	<script type="text/javascript">
 		$(function(){
-			getDist();
+			setTimeout(getDist(), 1000);
 		})
 
 		function getDist(){
@@ -16,7 +16,7 @@
 				dataType: 'json',
 				success: function(data){
 					$("#view").html(data.dist + "cm");
-					setTimeout(getDist(), 1500);
+					
 				},
 				error: function(){
 					$("#view").html("Error!!");
