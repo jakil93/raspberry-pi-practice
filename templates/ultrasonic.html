@@ -7,6 +7,10 @@
 
 	<script type="text/javascript">
 		$(function(){
+			getDist();
+		})
+
+		function getDist(){
 			$.ajax({
 				url: 'ajax',
 				dataType: 'json',
@@ -17,7 +21,8 @@
 					$("#view").html("Error!!");
 				}
 			});
-		})
+			setTimeout(getDist(), 500);
+		}
 	</script>
 </head>
 <body>
