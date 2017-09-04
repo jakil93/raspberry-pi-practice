@@ -3,7 +3,7 @@ import dic
 
 app = Flask(__name__)
 
-articles = dic.articles()
+arti = dic.articles()
 
 @app.route('/')
 def index():
@@ -11,10 +11,10 @@ def index():
 
 @app.route('/articles')
 def articles():
-	return render_template('articles.html', t_articles = articles)
+	return render_template('articles.html', t_articles = arti)
 
 @app.route('/article/<int:id>')
 def article(id):
-	return render_template('article.html', id = id, articles= articles)
+	return render_template('article.html', id = id, articles= arti)
 if __name__ == '__main__':
 	app.run(debug=True, host="0.0.0.0", port=8888)
