@@ -1,10 +1,11 @@
 #coding: utf-8
 from flask import Flask, render_template
 import dic
+import json
 
 app = Flask(__name__)
 
-arti = dic.articles()
+arti = json.dumps(dic.articles(), ensure_ascii=False).encode('utf8')
 
 @app.route('/')
 def index():
