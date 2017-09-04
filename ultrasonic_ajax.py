@@ -1,5 +1,6 @@
 #Libraries
 import RPi.GPIO as GPIO
+import time
 from flask import Flask, jsonify, render_template
  
 #GPIO Mode (BOARD / BCM)
