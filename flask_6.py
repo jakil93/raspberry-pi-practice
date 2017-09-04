@@ -6,7 +6,8 @@ app = Flask(__name__)
 @app.route("/posttest", methods=["POST"])
 def posttest():
 	name = request.form['name']
-	return render_template("flask_6.html", name={name})
+	print "받은 요청 : " + name
+	return render_template("flask_6.html", name = name)
 
 @app.route("/")
 def main():
