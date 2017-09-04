@@ -5,8 +5,7 @@ import json
 
 app = Flask(__name__)
 
-arti = dic.articles()
-arti = json.dumps(arti).decode('unicode-escape').encode('utf8')
+arti = dic.articles().encode('utf-8')
 
 @app.route('/')
 def index():
