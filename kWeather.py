@@ -1,5 +1,5 @@
 #coding: utf-8
-import time, httplib, urllib
+import time, httplib, urllib, json
 
 #set program info
 KEY = "90c4f0c8-d7b4-38a2-a221-701ad624f172"
@@ -12,6 +12,8 @@ con = httplib.HTTPConnection("apis.skplanetx.com")
 try:
     con.request("GET", URL)
     resp = con.getresponse()
-    print resp
+    result = json.load(resp.read())
+    print result
+    
 except:
     print "Error! Connection Fail!"
