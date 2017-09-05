@@ -64,5 +64,5 @@ while 1:
         print resp.status, resp.reason
     except:
         print "Error! Connection Fail!"
-    print "측정된 거리 : " + dist
+    print "측정된 거리 : " + str(dist)
     time.sleep(5)
