@@ -6,7 +6,7 @@ import httplib, urllib
 #API Key
 KEY = "W3T1G60VYTY05ZCZ"
 headers = {"Content-Type":"application/x-www-form-urlencoded",
-            "Accept" : "text/plain"}
+            "Accept" : "application/json"}
 
 #set GPIO.BCM
 
@@ -16,15 +16,14 @@ def sendData():
     humidity, temperature = Adafruit_DHT.read_retry(11, 3)
 
     if humidity is not None and temperature is not None:
-        # params = urllib.urlencode({'field1' : temperature,
-        #                             'field2' : humidity,
-        #                             'key' : KEY})
-        params = "field1=" + str(temperature) + "&field2=" + str(humidity) + "&key=" + KEY
+        params = urllib.urlencode({'field1' : temperature,
+                                    'field2' : humidity,
+                                    'key' : KEY})
+
         con = httplib.HTTPConnection("api.thingspeak.com")
 
         try:
-            con.request("POST", "/update", None, headers)
-            con.send(params)
+            con.request("POST", "/update", params, headers)
             resp = con.getresponse()
             print('온도 : {0:0.1f}*  습도 : {1:0.1f}% 정보를 보냈습니다..'.format(temperature, humidity))
         except:
