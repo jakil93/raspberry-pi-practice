@@ -12,26 +12,28 @@ headers = {"Content-Type":"application/x-www-form-urlencoded",
 
 
 def sendData():
+
+    humidity, temperature = Adafruit_DHT.read_retry(11, 3)
+
     if humidity is not None and temperature is not None:
-        print('온도 : {0:0.1f}*  습도 : {1:0.1f}% 정보를 보냈습니다..'.format(temperature, humidity))
+        # params = urllib.urlencode({'field1' : temperature,
+        #                             'field2' : humidity,
+        #                             'key' : KEY})
+        params = "field1=" + temperature + "&field2=" + humidity + "&key=" + KEY
+        con = httplib.HTTPConnection("api.thingspeak.com")
+
+        try:
+            con.request("POST", "/update", None, headers)
+            con.send(params)
+            resp = con.getresponse()
+            print('온도 : {0:0.1f}*  습도 : {1:0.1f}% 정보를 보냈습니다..'.format(temperature, humidity))
+        except:
+            print "Error! Connection Fail!"
     else:
         print('정보를 불러오는데 실패했습니다..')
 
 while 1:
-    humidity, temperature = Adafruit_DHT.read_retry(11, 3)
-    print('온도 : {0:0.1f}*  습도 : {1:0.1f}%'.format(temperature, humidity))
-    params = urllib.urlencode({'field1' : temperature,
-                                'field2' : humidity,
-                                'key' : KEY})
-    
-    con = httplib.HTTPConnection("api.thingspeak.com")
-
-    try:
-        con.request("POST", "/update", params, headers)
-        resp = con.getresponse()
-        print resp.status, resp.reason
-    except:
-        print "Error! Connection Fail!"
+    sendData()
     time.sleep(5)
 
 print "프로그램을 종료합니다."
