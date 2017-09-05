@@ -18,7 +18,7 @@ def sendData():
                                     'field2' : humidity,
                                     'key' : KEY})
         
-        con = httplib.HTTPSConnection("api.thingspeak.com")
+        con = httplib.HTTPConnection("api.thingspeak.com")
 
         try:
             con.request("POST", "/update", params, header)
