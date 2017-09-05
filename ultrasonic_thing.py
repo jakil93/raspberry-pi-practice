@@ -1,8 +1,15 @@
 #Libraries
 import RPi.GPIO as GPIO
 import time
+import httplib, urllib
 from flask import Flask, jsonify, render_template
- 
+
+#API Key
+KEY = "4HVWDTTFGPG3EX3D"
+headers = {"Content-Type":"application/x-www-form-urlencoded",
+            "Accept" : "text/plain"}
+
+
 #GPIO Mode (BOARD / BCM)
 GPIO.setmode(GPIO.BOARD)
 GPIO.cleanup()
@@ -44,18 +51,17 @@ def distance():
     distance = (TimeElapsed * 34300) / 2
  
     return distance
+while 1:
+    dist = distance()
+    params = urllib.urlencode({'field1' : dist,
+                                'key' : KEY})
+    con = httplib.HTTPConnection("api.thingspeak.com")
 
-app = Flask(__name__)
+    try:
+        con.request("POST", "/update", params, headers)
+        resp = con.getresponse()
+        print resp.status, resp.reason
+    except:
+        print "Error! Connection Fail!"
 
-@app.route('/')
-def main():
-	return render_template('ultrasonic.html')
-
-@app.route('/ajax')
-def ajax():
-	dist = distance()
-	data = jsonify(dist=dist, name="kty")
-	return data
-
-if __name__ == "__main__":
-	app.run(debug=True, host="0.0.0.0", port=8888)
+    time.sleep(5)
