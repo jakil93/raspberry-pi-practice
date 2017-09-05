@@ -19,7 +19,9 @@ def sendData():
 
 while 1:
     humidity, temperature = Adafruit_DHT.read_retry(11, 3)
+    print temperature + ", " + humidity
     params = urllib.urlencode({'field1' : temperature,
+                                'field2' : humidity,
                                 'key' : KEY})
     
     con = httplib.HTTPConnection("api.thingspeak.com")
