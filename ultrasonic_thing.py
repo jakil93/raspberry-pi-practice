@@ -1,3 +1,4 @@
+#coding: utf-8
 #Libraries
 import RPi.GPIO as GPIO
 import time
@@ -63,5 +64,5 @@ while 1:
         print resp.status, resp.reason
     except:
         print "Error! Connection Fail!"
-
+    print "측정된 거리 : " + dist
     time.sleep(5)
