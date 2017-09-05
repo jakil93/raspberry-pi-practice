@@ -19,7 +19,7 @@ def sendData():
         # params = urllib.urlencode({'field1' : temperature,
         #                             'field2' : humidity,
         #                             'key' : KEY})
-        params = "field1=" + temperature + "&field2=" + humidity + "&key=" + KEY
+        params = urllib.urlencode("field1=" + temperature + "&field2=" + humidity + "&key=" + KEY)
         con = httplib.HTTPConnection("api.thingspeak.com")
 
         try:
