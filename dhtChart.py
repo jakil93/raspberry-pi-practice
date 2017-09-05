@@ -14,7 +14,7 @@ humidity, temperature = Adafruit_DHT.read_retry(11, 3)
 def sendData():
     if humidity is not None and temperature is not None:
         print('온도 : {0:0.1f}*  습도 : {1:0.1f}% 정보를 보냈습니다..'.format(temperature, humidity))
-        params = urllib.urlencode({'field1' : str(temperature),
+        params = urllib.urlencode({'temperature' : temperature,
                                     'key' : KEY})
         
         con = httplib.HTTPConnection("api.thingspeak.com")
