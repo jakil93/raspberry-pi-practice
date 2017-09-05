@@ -16,10 +16,10 @@ def sendData():
         params = urllib.urlencode({'field1' : temperature,
                                     'field2' : humidity,
                                     'key' : KEY})
-        con = httplib.HTTPSConnection()
+        con = httplib.HTTPSConnection("api.thingspeak.com")
 
         try:
-            con.request("POST", "https://api.thingspeak.com/update")
+            con.request("POST", "/update")
             con.send(params)
             resp = con.getresponse()
             print resp.status, resp.reason
