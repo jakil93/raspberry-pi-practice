@@ -13,7 +13,6 @@ headers = {"Content-Type":"application/x-www-form-urlencoded",
 
 #GPIO Mode (BOARD / BCM)
 GPIO.setmode(GPIO.BOARD)
-GPIO.cleanup()
 
 #GPIO disable warnning!
 GPIO.setwarnings(False)
@@ -66,3 +65,7 @@ while 1:
         print "Error! Connection Fail!"
     print "측정된 거리 : " + str(dist)
     time.sleep(5)
+
+
+GPIO.cleanup()
+print "프로그램을 종료합니다."
