@@ -6,7 +6,7 @@ import httplib, urllib
 #API Key
 KEY = "W3T1G60VYTY05ZCZ"
 headers = {"Content-Type":"application/x-www-form-urlencoded",
-            "Accept" : "application/json"}
+            "Accept" : "text/plain"}
 
 #set GPIO.BCM
 
