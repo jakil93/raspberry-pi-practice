@@ -21,7 +21,7 @@ def sendData():
         con = httplib.HTTPSConnection("api.thingspeak.com")
 
         try:
-            con.request("POST", "/update", none, header)
+            con.request("POST", "/update", None, header)
             con.send(params)
             resp = con.getresponse()
             print resp.status, resp.reason
