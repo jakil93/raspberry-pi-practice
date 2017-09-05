@@ -5,7 +5,8 @@ import httplib, urllib
 
 #API Key
 KEY = "W3T1G60VYTY05ZCZ"
-
+headers = {"Content-Type":"application/x-www-form-urlencoded",
+            "Accept" : "text/plain"}
 
 #set GPIO.BCM
 humidity, temperature = Adafruit_DHT.read_retry(11, 3)
@@ -20,7 +21,7 @@ def sendData():
         con = httplib.HTTPSConnection("api.thingspeak.com")
 
         try:
-            con.request("POST", "/update")
+            con.request("POST", "/update", none, header)
             con.send(params)
             resp = con.getresponse()
             print resp.status, resp.reason
