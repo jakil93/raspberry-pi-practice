@@ -27,7 +27,7 @@ while 1:
     con = httplib.HTTPConnection("api.thingspeak.com")
 
     try:
-        con.request("POST", "/update", params, header)
+        con.request("POST", "/update", params, headers)
         resp = con.getresponse()
         print resp.status, resp.reason
     except:
