@@ -10,7 +10,7 @@ header = {"Content-Type":"application/x-www-form-urlencoded",
 con = httplib.HTTPConnection("apis.skplanetx.com")
 
 try:
-    con.request("GET")
+    con.request("GET", URL, body, headers)
     resp = con.getresponse()
     print resp
 except:
