@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>태영이의 MySQL을 플라스크에 써보기~~</title>
+</head>
+<body>
+    {{ data }}
+
+    <table border>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>PHONE</th>
+        </tr>
+        {% for item in data %}
+            <tr>
+                {% for col in item %}
+                    <td>{{col}}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+
+    <ul>
+    </ul>
+
+</body>
+</html>

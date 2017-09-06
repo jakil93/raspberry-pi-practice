@@ -1,18 +1,29 @@
-#coding: utf-8
-import time, httplib, urllib, json
+# coding: utf-8
+import httplib, urllib, json
 
-#set program info
+#set params
+params = {"version" : "1",
+          "city" : "부산",
+          "county" : "수영구",
+          "village" : "광안동",
+          }
+
+# set program info
+
+names = {'name':'강태영'}
+
 KEY = "90c4f0c8-d7b4-38a2-a221-701ad624f172"
-URL = "/weather/summary?version=1&lat=37.5714000000&lon=126.9658000000&stnid=108&appKey=" + KEY
-header = {"Accept" : "application/json"}
+URL = "/weather/current/minutely?"
+header = {"appKey" : KEY, "Accept" : "application/json; charset=UTF-8"}
 
 con = httplib.HTTPConnection("apis.skplanetx.com")
 
-try:
-    con.request("GET", URL, "", header)
-    resp = con.getresponse()
-    result = json.load(resp.read())
-    print result
-    
-except:
-    print "Error! Connection Fail!"
+params = urllib.urlencode(params)
+con.request("GET", URL + params, None, header)
+resp = con.getresponse()
+
+result = resp.read()
+
+datas = json.loads(result)
+datas = json.dumps(datas, ensure_ascii=False)
+print datas
