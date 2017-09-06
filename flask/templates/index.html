@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask에서 MySQL 활용</title>
+
+	<script src="{{ url_for('static', filename='jquery.js') }}"></script>
+
+    <script>
+        function getID(){
+
+            var id = $("#get_id").val();
+            if(id == ''){
+                alert("조회하고 싶은 아이디를 입력해주세요!");
+                $("#get_id").focus();
+            }
+            else{
+                $.ajax({
+                    url : "GET/ID",
+                    method : "GET",
+                    data : "id=" + id,
+                    success : function(data){
+                        if(data.result == "success"){                     
+                            $("#getIDResult").html(
+                                    "<h3>조회하신 아이디의 정보입니다.</h3>" +
+                                    "ID : " + data.id + "<br/>" +
+                                    "NAME : " + data.name + "<br/>" +
+                                    "PHONE : " + data.phone
+                                );   
+                        }else{
+                            $("#getIDResult").html(
+                                    "<h3>해당 아이디는 존재하지 않습니다.</h3>"
+                                );   
+                        }
+                    },
+                    error :function(){
+                        alert("통신에 에러가 있습니다. 잠시후 다시 시도해주세요.")
+                    }
+                });
+            }
+
+        }
+
+        function createID(){
+            var id = $("#create_id").val();
+            var name = $("#create_name").val();
+            var phone = $("#create_phone").val();
+
+            if(id == '' || name == '' || phone == ''){
+                alert("ID 생성에 필요한 id, name, phone을 적어주세요.");
+            }else{
+                $.ajax({
+                    url : "POST/CREATEID",
+                    method : "POST",
+                    contentType : "application/x-www-form-urlencoded",
+                    data : "id=" + id + "&name=" + name + "&phone=" + phone,
+                    success : function(data){
+                        if(data.result == 1){
+                            alert("아이디가 정상적으로 생성되었습니다!");
+                            $("#create_id").val("");
+                            $("#create_name").val("");
+                            $("#create_phone").val("");
+                        }else{
+                            alert("아이디 생성에 실패했습니다! 이미 있는 아이디일 수 있습니다.");
+                            $("#create_id").focus();
+                        }
+                    },
+                    error :function(){
+                        alert("통신에 에러가 있습니다. 잠시후 다시 시도해주세요.")
+                    }
+                });
+            }
+
+        }
+
+        function updateID(){
+            var id = $("#update_id").val();
+            var name = $("#update_name").val();
+            var phone = $("#update_phone").val();
+
+            if(id == '' || name == '' || phone == ''){
+                alert("ID 업데이트에 필요한 id, name, phone을 적어주세요.");
+            }else{
+                $.ajax({
+                    url : "PUT/UPDATEID",
+                    method : "POST",
+                    contentType : "application/x-www-form-urlencoded",
+                    data : "id=" + id + "&name=" + name + "&phone=" + phone,
+                    success : function(data){
+                        if(data.result == 1){
+                            alert("아이디가 업데이트 되었습니다. 조회해보세요~");
+                            $("#update_id").val("");
+                            $("#update_name").val("");
+                            $("#update_phone").val("");
+                        }else{
+                            alert("존재하지 않는 아이디를 업데이트하려고 하셨습니다. 아이디를 확인해주세요.");
+                            $("#update_id").focus();
+                        }
+                    },
+                    error :function(){
+                        alert("통신에 에러가 있습니다. 잠시후 다시 시도해주세요.")
+                    }
+                });
+            }
+
+        }
+
+        function deleteID(){
+            var id = $("#delete_id").val();
+
+            if(id == ''){
+                alert("삭제할 ID를 적어주세요.");
+            }else{
+                $.ajax({
+                    url : "DELETE/DELETEID",
+                    method : "POST",
+                    contentType : "application/x-www-form-urlencoded",
+                    data : "id=" + id,
+                    success : function(data){
+                        if(data.result == 1){
+                            alert(id + "가 삭제되었습니다.");
+                            $("#delete_id").val("");
+                        }else{
+                            alert("존재하지 않는 아이디입니다.");
+                            $("#delete_id").focus();
+                        }
+                    },
+                    error :function(){
+                        alert("통신에 에러가 있습니다. 잠시후 다시 시도해주세요.")
+                    }
+                });
+            }
+
+        }
+
+        function getAllData(){
+            $.ajax({
+                url : "GET/ALLID",
+                method : "POST",
+                success : function(data){
+                    var div = $("#getAllDataResult");
+
+                    var tag;
+
+                    tag = "<table border>";
+                    tag += "<tr>";
+                    tag += "<th>ID</th>";
+                    tag += "<th>NAME</th>";
+                    tag += "<th>PHONE</th>";
+                    tag += "</tr>";
+                    for(i=0; i<data.length; i++){                    
+                        tag += "<tr>";
+                        tag += "<td>"+ data[i].id +"</td>";
+                        tag += "<td>"+ data[i].name +"</td>";
+                        tag += "<td>"+ data[i].phone +"</td>";
+                        tag += "</tr>";
+                    }
+                    tag += "</table>";
+
+                    div.html(tag);
+                },
+                error :function(){
+                    alert("통신에 에러가 있습니다. 잠시후 다시 시도해주세요.")
+                }
+            });
+
+        }
+    </script>
+
+</head>
+<body>
+
+    <h2>1. 전체 ID 조회</h2>
+    <button onclick="getAllData()" style="width:300px">데이터 불러오기</button>
+    <div id="getAllDataResult"></div>
+
+    <hr/>
+
+    <h2>2. ID 조회하기(GET : Select)</h2>
+    <input type="text" id="get_id" value="jakil93"/>
+    <button onclick="getID()">조회</button>
+    <div id="getIDResult"></div>
+    <hr/>
+
+    <h2>3. ID 생성하기(POST : Create)</h2>
+    id : <input type="text" id="create_id"/> <br>
+    name : <input type="text" id="create_name"/> <br>
+    phone : <input type="text" id="create_phone"/> <br>
+    <button onclick="createID()">아이디 생성</button>
+
+    <hr/>
+
+    <h2>4. ID정보 수정하기(PUT : Update)</h2>
+    id : <input type="text" id="update_id"/> <br>
+    name : <input type="text" id="update_name"/> <br>
+    phone : <input type="text" id="update_phone"/> <br>
+    <button onclick="updateID()">정보 수정</button>
+
+    <h2>5. ID 삭제하기(DELETE : delete)</h2>
+    id : <input type="text" id="delete_id"/> <br>
+    <button onclick="deleteID()">삭제</button>
+
+
+</body>
+</html>
