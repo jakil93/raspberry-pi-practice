@@ -66,7 +66,13 @@ app = Flask(__name__)
 @app.route("/dht11", methods=["GET"])
 def dht11():
 	temp, humidity = getTemperatureAndHumidit()
-	data = jsonify(temp = temp, humidity = humidity)
+
+	if temp == 0 and humidity == 0:
+		result = "fail"
+	else:
+		result = "success"
+
+	data = jsonify(temp = temp, humidity = humidity, result = result)
 	return data
 
 @app.route('/ultrasonic', methods=["GET"])
