@@ -6,7 +6,6 @@ import logger
 from dht11.dht11 import DHT11
 from flask import Flask, request, render_template, jsonify
 
-GPIO.cleanup()
 GPIO.setmode(GPIO.BOARD)
 
 #GPIO disable warnning!
@@ -130,5 +129,5 @@ def ledallon():
 
 if __name__ == "__main__":
 	app.run(debug = True, host = "0.0.0.0", port = 8888)
-	GPIO.cleanup()
 	print "서버를 종료합니다."
+	GPIO.cleanup()
