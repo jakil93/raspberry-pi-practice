@@ -57,11 +57,8 @@ def distance():
 def getTemperatureAndHumidit():
 	instance = DHT11(pin=5)
 	result = instance.read()
+	return result.temperature, result.humidity
 
-	if result.is_vaild():
-		return result.temperature, result.humidity
-	else:
-		return 0, 0
 
 #get flask instance
 app = Flask(__name__)
