@@ -137,6 +137,9 @@ def get_allid():
     data = dataSelectAll()
     for item in data:
         result.append({"id" : item[0], "name" : item[1], "phone" : item[2]})
+
+    print result
+
     return jsonify(result)
 
 
