@@ -55,7 +55,7 @@ def distance():
 
 	return distance
 def getTemperatureAndHumidit():
-	instance = DHT11(pin = 5)
+	instance = DHT11(pin = 3)
 	result = instance.read()
 
 	if result.is_vaild():
