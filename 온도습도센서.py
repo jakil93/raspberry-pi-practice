@@ -8,7 +8,7 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 GPIO.cleanup()
 
-instance = DHT11(pin = 8)
+instance = DHT11(pin = 5)
 result = instance.read()
 
 while True:
